@@ -1,0 +1,706 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Blog, Cafeboy" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1、要想使用PL/SQL需要先安装oracle客户端（这个是必须的，要不然plsql就用不了，这个客户端可以去oracle官网上下载，名字叫instance client,尽量用较新的版本就可以了，windows版的大的也就50多M，还有精简版的20多M，地址：http://www.oracle.com/technetwork/cn/database/features/instant-client">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置PL/SQL DEVELOPER远程访问oracle数据库">
+<meta property="og:url" content="http://blog.cafeboy.org/2011/12/21/配置plsql-developer远程访问oracle数据库/index.html">
+<meta property="og:site_name" content="后知后觉">
+<meta property="og:description" content="1、要想使用PL/SQL需要先安装oracle客户端（这个是必须的，要不然plsql就用不了，这个客户端可以去oracle官网上下载，名字叫instance client,尽量用较新的版本就可以了，windows版的大的也就50多M，还有精简版的20多M，地址：http://www.oracle.com/technetwork/cn/database/features/instant-client">
+<meta property="og:updated_time" content="2016-09-04T15:20:59.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置PL/SQL DEVELOPER远程访问oracle数据库">
+<meta name="twitter:description" content="1、要想使用PL/SQL需要先安装oracle客户端（这个是必须的，要不然plsql就用不了，这个客户端可以去oracle官网上下载，名字叫instance client,尽量用较新的版本就可以了，windows版的大的也就50多M，还有精简版的20多M，地址：http://www.oracle.com/technetwork/cn/database/features/instant-client">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 配置PL/SQL DEVELOPER远程访问oracle数据库 | 后知后觉 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">后知后觉</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Google Fans</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-goldcard">
+          <a href="/goldcard" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            金卡
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bbpress-chinese-translation">
+          <a href="/bbpress-chinese-translation" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br />
+            
+            bbPress简体中文版
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                配置PL/SQL DEVELOPER远程访问oracle数据库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2011-12-21T09:42:54+08:00" content="2011-12-21">
+              2011-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日积月累/" itemprop="url" rel="index">
+                    <span itemprop="name">日积月累</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2011/12/21/配置plsql-developer远程访问oracle数据库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/12/21/配置plsql-developer远程访问oracle数据库/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1、要想使用PL/SQL<span style="color: #ff00ff;">需要先安装oracle客户端</span>（这个是必须的，要不然plsql就用不了，这个客户端可以去oracle官网上下载，名字叫instance client,尽量用较新的版本就可以了，windows版的大的也就50多M，还有精简版的20多M，地址：<a href="http://www.oracle.com/technetwork/cn/database/features/instant-client/index.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/database/features/instant-client/index.html</a>，挑个适合你的系统的版本的。）</p>
+<p>oracle客户端的安装很简单，直接解压出来，放到你喜欢的目录下就算安装好了（比如我放在E:\instantclient_11_2这里了，instantclient_11_2就是客户端解压出来的目录）。</p>
+<p>2、要使用oracle的客户端还需要配置一下，在oracle客户端目录里（E:\instantclient_11_2）新建个文件夹名字叫<span style="color: #ff00ff;">network</span>，然后进入network目录再新建个目录<span style="color: #ff00ff;">admin</span>，然后进admin目录，在此目录下要创建连接oracle数据库的配置文件<span style="color: #ff00ff;">tnsnames.ora</span>（就得是这个名字，其它名字无效），该文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wpsdb1 =</div><div class="line">(DESCRIPTION =</div><div class="line">(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.12.3)(PORT = 1521))</div><div class="line">    (CONNECT_DATA =</div><div class="line">        (SERVER = oracle1)</div><div class="line">        (SERVICE_NAME = wpsdb.huacai.com)</div><div class="line">    )</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>第一行开头不能有空格，那个wpsdb1是oracle数据库的实例名（ORACLE_SID）(可以随便写),</p>
+<p>第二行无所谓，等号后留空即可</p>
+<p>第三行很重要，HOST后面那个ip是oracle数据库所在的主机的ip，要是有域名解析的话可以用主机名，后面的那个port是oracle监听的端口，一般是1521（该端口可在oracle主机上用命令<span style="color: #ff00ff;"><strong>netstat -ntlp|grep tnslsnr</strong></span>查看）。</p>
+<p>第四行无所谓，留空值即可</p>
+<p>第五行那个oracle1是我的oracle的主机的主机名（可用命令<span style="color: #ff00ff;"><strong>hostname</strong></span>查看，这一行可以忽略，直接不要写）</p>
+<p>第六行很重要，网上很多资料说这个地方填oracle的sid，其实不然（我把oracle的sid值填上去后报错：<span style="color: #ff0000;">ORA-12154 TNS:监听程序当前无法识别连接描述符中请求的服务</span>），实际上这里应该填的是oracle的服务名，要查看这个服务名可在oracle主机上<span style="color: #ff00ff;">用oracle账户</span>输入命令<span style="color: #ff00ff;"><strong>lsnrctl status</strong></span>查看，我的得到的执行结果里有这样几行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Services Summary...</div><div class="line">Service &quot;wpsdb.huacai.com&quot; has 2 instance(s).</div><div class="line">Instance &quot;wpsdb1&quot;, status READY, has 2 handler(s) for this service...</div><div class="line">Instance &quot;wpsdb2&quot;, status READY, has 1 handler(s) for this service...</div></pre></td></tr></table></figure>
+<p>对比上面SERVICE_NAME我添的值，应该不难判断你的服务名是什么了。</p>
+<p>3、像上面这样配置完了后plsql还不能登录oracle使用，因为它现在还找不到你的这个oracle的客户端，但是可以进入软件里面，进入软件，选择Tools-&gt;Preferences，在<span style="color: #ff00ff;">Oracle Home</span>和<span style="color: #ff00ff;">OCI Library</span>两栏中分别填入Oracle客户端的路径和OCI文件的路径（oci.dll文件直接在instantclient_11_2文件夹下），所以我在这两个选项中填写的内容是”<span style="color: #ff00ff;">E:\instantclient_11_2</span>“和”<span style="color: #ff00ff;">E:\instantclient_11_2\oci.dll</span>“。这时再登录就可以登录成功了。如若还不行就重启一下PL/SQL。</p>
+<p>4、有时候可能会出现客户端对中文支持不好的问题，可参照如下第三条的环境变量设置：</p>
+<p>桌面上，右键点“我的电脑”，选择“属性”，选择“高级”页中的“环境变量”，在系统变量中，增加：<br><strong>1) 变量名：ORACLE_HOME<br>变量值：E:\instantclient_11_2<br>2) 变量名：TNS_ADMIN<br>变量值：E:\instantclient_11_2<br>3) 变量名：NLS_LANG<br>变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK<br>4) 修改Path变量，在后面添加 E:\instantclient_11_2</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2011/11/28/redis-kv-design/" rel="next" title="浅谈REDIS数据库的键值设计">
+                <i class="fa fa-chevron-left"></i> 浅谈REDIS数据库的键值设计
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012/08/29/情侣之间不能说的话/" rel="prev" title="情侣之间不能说的话">
+                情侣之间不能说的话 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jumkey" />
+          <p class="site-author-name" itemprop="name">Jumkey</p>
+          <p class="site-description motion-element" itemprop="description">Github 上的个人博客</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jumkey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/jumkey" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/jumkey" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2008 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jumkey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'jumkey';
+      var disqus_identifier = '2011/12/21/配置plsql-developer远程访问oracle数据库/';
+      var disqus_title = '配置PL/SQL DEVELOPER远程访问oracle数据库';
+      var disqus_url = 'http://blog.cafeboy.org/2011/12/21/配置plsql-developer远程访问oracle数据库/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
