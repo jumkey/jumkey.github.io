@@ -1,696 +1,402 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="redis,设计," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="丰富的数据结构使得redis的设计非常的有趣。不像关系型数据库那样，DEV和DBA需要深度沟通，review每行sql语句，也不像memcached那样，不需要DBA的参与。redis的DBA需要熟悉数据结构，并能了解使用场景。
-下面举一些常见适合kv数据库的例子来谈谈键值的设计，并与关系型数据库做一个对比，发现关系型的不足之处。
-用户登录系统记录用户登录信息的一个系统， 我们简化业务后只留下一张">
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.cafeboy.org&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="丰富的数据结构使得redis的设计非常的有趣。不像关系型数据库那样，DEV和DBA需要深度沟通，review每行sql语句，也不像memcached那样，不需要DBA的参与。redis的DBA需要熟悉数据结构，并能了解使用场景。 下面举一些常见适合kv数据库的例子来谈谈键值的设计，并与关系型数据库做一个对比，发现关系型的不足之处。 用户登录系统记录用户登录信息的一个系统， 我们简化业务后只留下一张">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈REDIS数据库的键值设计">
-<meta property="og:url" content="http://blog.cafeboy.org/2011/11/28/redis-kv-design/index.html">
+<meta property="og:url" content="https://blog.cafeboy.org/2011/11/28/redis-kv-design/index.html">
 <meta property="og:site_name" content="后知后觉">
-<meta property="og:description" content="丰富的数据结构使得redis的设计非常的有趣。不像关系型数据库那样，DEV和DBA需要深度沟通，review每行sql语句，也不像memcached那样，不需要DBA的参与。redis的DBA需要熟悉数据结构，并能了解使用场景。
-下面举一些常见适合kv数据库的例子来谈谈键值的设计，并与关系型数据库做一个对比，发现关系型的不足之处。
-用户登录系统记录用户登录信息的一个系统， 我们简化业务后只留下一张">
-<meta property="og:updated_time" content="2016-09-04T12:26:18.715Z">
+<meta property="og:description" content="丰富的数据结构使得redis的设计非常的有趣。不像关系型数据库那样，DEV和DBA需要深度沟通，review每行sql语句，也不像memcached那样，不需要DBA的参与。redis的DBA需要熟悉数据结构，并能了解使用场景。 下面举一些常见适合kv数据库的例子来谈谈键值的设计，并与关系型数据库做一个对比，发现关系型的不足之处。 用户登录系统记录用户登录信息的一个系统， 我们简化业务后只留下一张">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2011-11-28T05:26:48.000Z">
+<meta property="article:modified_time" content="2016-09-04T12:26:18.716Z">
+<meta property="article:author" content="Jumkey">
+<meta property="article:tag" content="redis">
+<meta property="article:tag" content="设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈REDIS数据库的键值设计">
-<meta name="twitter:description" content="丰富的数据结构使得redis的设计非常的有趣。不像关系型数据库那样，DEV和DBA需要深度沟通，review每行sql语句，也不像memcached那样，不需要DBA的参与。redis的DBA需要熟悉数据结构，并能了解使用场景。
-下面举一些常见适合kv数据库的例子来谈谈键值的设计，并与关系型数据库做一个对比，发现关系型的不足之处。
-用户登录系统记录用户登录信息的一个系统， 我们简化业务后只留下一张">
+
+
+<link rel="canonical" href="https://blog.cafeboy.org/2011/11/28/redis-kv-design/">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.cafeboy.org&#x2F;2011&#x2F;11&#x2F;28&#x2F;redis-kv-design&#x2F;&quot;,&quot;path&quot;:&quot;2011&#x2F;11&#x2F;28&#x2F;redis-kv-design&#x2F;&quot;,&quot;title&quot;:&quot;浅谈REDIS数据库的键值设计&quot;}</script>
 
-  <title> 浅谈REDIS数据库的键值设计 | 后知后觉 </title>
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>浅谈REDIS数据库的键值设计 | 后知后觉</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">后知后觉</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
-  <p class="site-subtitle">Google Fans</p>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">后知后觉</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Google Fans</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-goldcard">
-          <a href="/goldcard" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
-            
-            金卡
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-bbpress-chinese-translation">
-          <a href="/bbpress-chinese-translation" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br />
-            
-            bbPress简体中文版
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-goldcard"><a href="/goldcard/" rel="section"><i class="fa fa-credit-card fa-fw"></i>金卡</a></li>
+        <li class="menu-item menu-item-bbpress-chinese-translation"><a href="/bbpress-chinese-translation/" rel="section"><i class="fa fa-globe fa-fw"></i>bbPress简体中文版</a></li>
+  </ul>
 </nav>
 
- </div>
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">用户登录系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.</span> <span class="nav-text">关系型数据库的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">redis的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TAG%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">TAG系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AE%BE%E8%AE%A1-1"><span class="nav-number">2.1.</span> <span class="nav-text">关系型数据库的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E7%9A%84%E8%AE%BE%E8%AE%A1-1"><span class="nav-number">2.2.</span> <span class="nav-text">redis的设计</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jumkey"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Jumkey</p>
+  <div class="site-description" itemprop="description">Github 上的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jumkey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jumkey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/jumkey" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jumkey" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/jumkey" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;jumkey" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
 
   
+
+
+<div class="post-block">
+  
   
 
-  
-  
-  
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.cafeboy.org/2011/11/28/redis-kv-design/">
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Jumkey">
+      <meta itemprop="description" content="Github 上的个人博客">
+    </span>
 
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="后知后觉">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈REDIS数据库的键值设计
+        </h1>
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                浅谈REDIS数据库的键值设计
-              
-            
-          </h1>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2011-11-28T13:26:48+08:00" content="2011-11-28">
-              2011-11-28
-            </time>
-          </span>
+      <time title="创建时间：2011-11-28 13:26:48" itemprop="dateCreated datePublished" datetime="2011-11-28T13:26:48+08:00">2011-11-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2016-09-04 20:26:18" itemprop="dateModified" datetime="2016-09-04T20:26:18+08:00">2016-09-04</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E7%A7%AF%E6%9C%88%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">日积月累</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日积月累/" itemprop="url" rel="index">
-                    <span itemprop="name">日积月累</span>
-                  </a>
-                </span>
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2011/11/28/redis-kv-design/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/11/28/redis-kv-design/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
 
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2011/11/28/redis-kv-design/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/11/28/redis-kv-design/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
         <p>丰富的数据结构使得redis的设计非常的有趣。不像关系型数据库那样，DEV和DBA需要深度沟通，review每行sql语句，也不像memcached那样，不需要DBA的参与。redis的DBA需要熟悉数据结构，并能了解使用场景。</p>
 <p>下面举一些常见适合kv数据库的例子来谈谈键值的设计，并与关系型数据库做一个对比，发现关系型的不足之处。</p>
 <h2 id="用户登录系统"><a href="#用户登录系统" class="headerlink" title="用户登录系统"></a>用户登录系统</h2><p>记录用户登录信息的一个系统， 我们简化业务后只留下一张表。</p>
-<h3 id="关系型数据库的设计"><a href="#关系型数据库的设计" class="headerlink" title="关系型数据库的设计"></a>关系型数据库的设计</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from login;</div><div class="line">+---------+----------------+-------------+---------------------+</div><div class="line">| user_id | name           | login_times | last_login_time     |</div><div class="line">+---------+----------------+-------------+---------------------+</div><div class="line">|       1 | ken thompson   |           5 | 2011-01-01 00:00:00 |</div><div class="line">|       2 | dennis ritchie |           1 | 2011-02-01 00:00:00 |</div><div class="line">|       3 | Joe Armstrong  |           2 | 2011-03-01 00:00:00 |</div><div class="line">+---------+----------------+-------------+---------------------+</div></pre></td></tr></table></figure>
+<h3 id="关系型数据库的设计"><a href="#关系型数据库的设计" class="headerlink" title="关系型数据库的设计"></a>关系型数据库的设计</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> login;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+----------------+-------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span> user_id <span class="operator">|</span> name           <span class="operator">|</span> login_times <span class="operator">|</span> last_login_time     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+----------------+-------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span> ken thompson   <span class="operator">|</span>           <span class="number">5</span> <span class="operator">|</span> <span class="number">2011</span><span class="number">-01</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span> dennis ritchie <span class="operator">|</span>           <span class="number">1</span> <span class="operator">|</span> <span class="number">2011</span><span class="number">-02</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>       <span class="number">3</span> <span class="operator">|</span> Joe Armstrong  <span class="operator">|</span>           <span class="number">2</span> <span class="operator">|</span> <span class="number">2011</span><span class="number">-03</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+----------------+-------------+---------------------+</span></span><br></pre></td></tr></table></figure>
 <p>user_id表的主键，name表示用户名，login_times表示该用户的登录次数，每次用户登录后，login_times会自增，而last_login_time更新为当前时间。</p>
 <h3 id="redis的设计"><a href="#redis的设计" class="headerlink" title="redis的设计"></a>redis的设计</h3><p>关系型数据转化为KV数据库，我的方法如下：</p>
 <p>key 表名：主键值：列名</p>
 <p>value 列值</p>
-<p>一般使用冒号做分割符，这是不成文的规矩。比如在php-admin for redis系统里，就是默认以冒号分割，于是user:1 user:2等key会分成一组。于是以上的关系数据转化成kv数据后记录如下：<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Set</span> login:<span class="number">1</span>:login_times <span class="number">5</span></div><div class="line"><span class="built_in">Set</span> login:<span class="number">2</span>:login_times <span class="number">1</span></div><div class="line"><span class="built_in">Set</span> login:<span class="number">3</span>:login_times <span class="number">2</span></div><div class="line"></div><div class="line"><span class="built_in">Set</span> login:<span class="number">1</span>:last_login_time <span class="number">2011</span>-<span class="number">1</span>-<span class="number">1</span></div><div class="line"><span class="built_in">Set</span> login:<span class="number">2</span>:last_login_time <span class="number">2011</span>-<span class="number">2</span>-<span class="number">1</span></div><div class="line"><span class="built_in">Set</span> login:<span class="number">3</span>:last_login_time <span class="number">2011</span>-<span class="number">3</span>-<span class="number">1</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> login:<span class="number">1</span>:name "ken thompson"</div><div class="line"><span class="built_in">set</span> login:<span class="number">2</span>:name "dennis ritchie"</div><div class="line"><span class="built_in">set</span> login:<span class="number">3</span>:name "Joe Armstrong"</div></pre></td></tr></table></figure></p>
+<p>一般使用冒号做分割符，这是不成文的规矩。比如在php-admin for redis系统里，就是默认以冒号分割，于是user:1 user:2等key会分成一组。于是以上的关系数据转化成kv数据后记录如下：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set</span> login:<span class="number">1</span>:login_times <span class="number">5</span></span><br><span class="line"><span class="built_in">Set</span> login:<span class="number">2</span>:login_times <span class="number">1</span></span><br><span class="line"><span class="built_in">Set</span> login:<span class="number">3</span>:login_times <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Set</span> login:<span class="number">1</span>:last_login_time <span class="number">2011</span>-<span class="number">1</span>-<span class="number">1</span></span><br><span class="line"><span class="built_in">Set</span> login:<span class="number">2</span>:last_login_time <span class="number">2011</span>-<span class="number">2</span>-<span class="number">1</span></span><br><span class="line"><span class="built_in">Set</span> login:<span class="number">3</span>:last_login_time <span class="number">2011</span>-<span class="number">3</span>-<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> login:<span class="number">1</span>:name &quot;ken thompson&quot;</span><br><span class="line"><span class="built_in">set</span> login:<span class="number">2</span>:name &quot;dennis ritchie&quot;</span><br><span class="line"><span class="built_in">set</span> login:<span class="number">3</span>:name &quot;Joe Armstrong&quot;</span><br></pre></td></tr></table></figure>
 <p>这样在已知主键的情况下，通过get、set就可以获得或者修改用户的登录次数和最后登录时间和姓名。</p>
-<p>一般用户是无法知道自己的id的，只知道自己的用户名，所以还必须有一个从name到id的映射关系，这里的设计与上面的有所不同。<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> "login:ken thompson:id"      <span class="number">1</span></div><div class="line"><span class="built_in">set</span> "login:dennis ritchie:id"    <span class="number">2</span></div><div class="line"><span class="built_in">set</span> "login:Joe Armstrong:id"     <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>这样每次用户登录的时候业务逻辑如下（python版），r是redis对象，name是已经获知的用户名。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#获得用户的id</span></div><div class="line">uid = r.get(<span class="string">"login:%s:id"</span> % name)</div><div class="line"><span class="comment">#自增用户的登录次数</span></div><div class="line">ret = r.incr(<span class="string">"login:%s:login_times"</span> % uid)</div><div class="line"><span class="comment">#更新该用户的最后登录时间</span></div><div class="line">ret = r.set(<span class="string">"login:%s:last_login_time"</span> % uid, datetime.datetime.now())</div></pre></td></tr></table></figure></p>
+<p>一般用户是无法知道自己的id的，只知道自己的用户名，所以还必须有一个从name到id的映射关系，这里的设计与上面的有所不同。</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> &quot;login:ken thompson:id&quot;      <span class="number">1</span></span><br><span class="line"><span class="built_in">set</span> &quot;login:dennis ritchie:id&quot;    <span class="number">2</span></span><br><span class="line"><span class="built_in">set</span> &quot;login:Joe Armstrong:id&quot;     <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>这样每次用户登录的时候业务逻辑如下（python版），r是redis对象，name是已经获知的用户名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获得用户的id</span></span><br><span class="line">uid = r.get(<span class="string">&quot;login:%s:id&quot;</span> % name)</span><br><span class="line"><span class="comment">#自增用户的登录次数</span></span><br><span class="line">ret = r.incr(<span class="string">&quot;login:%s:login_times&quot;</span> % uid)</span><br><span class="line"><span class="comment">#更新该用户的最后登录时间</span></span><br><span class="line">ret = r.<span class="built_in">set</span>(<span class="string">&quot;login:%s:last_login_time&quot;</span> % uid, datetime.datetime.now())</span><br></pre></td></tr></table></figure>
 <p>如果需求仅仅是已知id，更新或者获取某个用户的最后登录时间，登录次数，关系型和kv数据库无啥区别。一个通过btree pk，一个通过hash，效果都很好。</p>
-<p>假设有如下需求，查找最近登录的N个用户。开发人员看看，还是比较简单的，一个sql搞定。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> login <span class="keyword">order</span> <span class="keyword">by</span> last_login_time <span class="keyword">desc</span> <span class="keyword">limit</span> N</div></pre></td></tr></table></figure></p>
+<p>假设有如下需求，查找最近登录的N个用户。开发人员看看，还是比较简单的，一个sql搞定。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> login <span class="keyword">order</span> <span class="keyword">by</span> last_login_time <span class="keyword">desc</span> limit N</span><br></pre></td></tr></table></figure>
 <p>DBA了解需求后，考虑到以后表如果比较大，所以在last_login_time上建个索引。执行计划从索引leafblock 的最右边开始访问N条记录，再回表N次，效果很好。</p>
-<p>过了两天，又来一个需求，需要知道登录次数最多的人是谁。同样的关系型如何处理？DEV说简单<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> login <span class="keyword">order</span> <span class="keyword">by</span> login_times <span class="keyword">desc</span> <span class="keyword">limit</span> N</div></pre></td></tr></table></figure></p>
+<p>过了两天，又来一个需求，需要知道登录次数最多的人是谁。同样的关系型如何处理？DEV说简单</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> login <span class="keyword">order</span> <span class="keyword">by</span> login_times <span class="keyword">desc</span> limit N</span><br></pre></td></tr></table></figure>
 <p>DBA一看，又要在login_time上建立一个索引。有没有觉得有点问题呢，表上每个字段上都有素引。</p>
 <p>关系型数据库的数据存储的的不灵活是问题的源头，数据仅有一种储存方法，那就是按行排列的堆表。统一的数据结构意味着你必须使用索引来改变sql的访问路径来快速访问某个列的，而访问路径的增加又意味着你必须使用统计信息来辅助，于是一大堆的问题就出现了。</p>
 <p>没有索引，没有统计计划，没有执行计划，这就是kv数据库。</p>
-<p>redis里如何满足以上的需求呢？ 对于求最新的N条数据的需求，链表的后进后出的特点非常适合。我们在上面的登录代码之后添加一段代码，维护一个登录的链表，控制他的长度，使得里面永远保存的是最近的N个登录用户。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#把当前登录人添加到链表里</span></div><div class="line">ret = r.lpush(<span class="string">"login:last_login_times"</span>, uid)</div><div class="line"><span class="comment">#保持链表只有N位</span></div><div class="line">ret = redis.ltrim(<span class="string">"login:last_login_times"</span>, <span class="number">0</span>, N<span class="number">-1</span>)</div></pre></td></tr></table></figure></p>
-<p>这样需要获得最新登录人的id，如下的代码即可<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">last_login_list = r.lrange(<span class="string">"login:last_login_times"</span>, <span class="number">0</span>, N<span class="number">-1</span>)</div></pre></td></tr></table></figure></p>
-<p>另外，求登录次数最多的人，对于排序，积分榜这类需求，sorted set非常的适合，我们把用户和登录次数统一存储在一个sorted set里。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">zadd login:login_times 5 1</div><div class="line">zadd login:login_times 1 2</div><div class="line">zadd login:login_times 2 3</div></pre></td></tr></table></figure></p>
-<p>这样假如某个用户登录，额外维护一个sorted set，代码如此<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#对该用户的登录次数自增1</span></div><div class="line">ret = r.zincrby(<span class="string">"login:login_times"</span>, <span class="number">1</span>, uid)</div></pre></td></tr></table></figure></p>
-<p>那么如何获得登录次数最多的用户呢，逆序排列取的排名第N的用户即可<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ret = r.zrevrange(<span class="string">"login:login_times"</span>, <span class="number">0</span>, N<span class="number">-1</span>)</div></pre></td></tr></table></figure></p>
+<p>redis里如何满足以上的需求呢？ 对于求最新的N条数据的需求，链表的后进后出的特点非常适合。我们在上面的登录代码之后添加一段代码，维护一个登录的链表，控制他的长度，使得里面永远保存的是最近的N个登录用户。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把当前登录人添加到链表里</span></span><br><span class="line">ret = r.lpush(<span class="string">&quot;login:last_login_times&quot;</span>, uid)</span><br><span class="line"><span class="comment">#保持链表只有N位</span></span><br><span class="line">ret = redis.ltrim(<span class="string">&quot;login:last_login_times&quot;</span>, <span class="number">0</span>, N-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>这样需要获得最新登录人的id，如下的代码即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last_login_list = r.lrange(<span class="string">&quot;login:last_login_times&quot;</span>, <span class="number">0</span>, N-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>另外，求登录次数最多的人，对于排序，积分榜这类需求，sorted set非常的适合，我们把用户和登录次数统一存储在一个sorted set里。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zadd login:login_times <span class="number">5</span> <span class="number">1</span></span><br><span class="line">zadd login:login_times <span class="number">1</span> <span class="number">2</span></span><br><span class="line">zadd login:login_times <span class="number">2</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>这样假如某个用户登录，额外维护一个sorted set，代码如此</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#对该用户的登录次数自增1</span></span><br><span class="line">ret = r.zincrby(<span class="string">&quot;login:login_times&quot;</span>, <span class="number">1</span>, uid)</span><br></pre></td></tr></table></figure>
+<p>那么如何获得登录次数最多的用户呢，逆序排列取的排名第N的用户即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ret = r.zrevrange(<span class="string">&quot;login:login_times&quot;</span>, <span class="number">0</span>, N-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>可以看出，DEV需要添加2行代码，而DBA不需要考虑索引什么的。</p>
 <h2 id="TAG系统"><a href="#TAG系统" class="headerlink" title="TAG系统"></a>TAG系统</h2><p>tag在互联网应用里尤其多见，如果以传统的关系型数据库来设计有点不伦不类。我们以查找书的例子来看看redis在这方面的优势。</p>
-<h3 id="关系型数据库的设计-1"><a href="#关系型数据库的设计-1" class="headerlink" title="关系型数据库的设计"></a>关系型数据库的设计</h3><p>两张表，一张book的明细，一张tag表，表示每本的tag，一本书存在多个tag。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from book;</div><div class="line">+------+-------------------------------+----------------+</div><div class="line">| id   | name                          | author         |</div><div class="line">+------+-------------------------------+----------------+</div><div class="line">|    1 | The Ruby Programming Language | Mark Pilgrim   |</div><div class="line">|    1 | Ruby on rail                  | David Flanagan |</div><div class="line">|    1 | Programming Erlang            | Joe Armstrong  |</div><div class="line">+------+-------------------------------+----------------+</div><div class="line"></div><div class="line">mysql&gt; select * from tag;</div><div class="line">+---------+---------+</div><div class="line">| tagname | book_id |</div><div class="line">+---------+---------+</div><div class="line">| ruby    |       1 |</div><div class="line">| ruby    |       2 |</div><div class="line">| web     |       2 |</div><div class="line">| erlang  |       3 |</div><div class="line">+---------+---------+</div></pre></td></tr></table></figure></p>
-<p>假如有如此需求，查找即是ruby又是web方面的书籍，如果以关系型数据库会怎么处理？<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> b.name, b.author  <span class="keyword">from</span> tag t1, tag t2, book b</div><div class="line"><span class="keyword">where</span> t1.tagname = <span class="string">'web'</span> <span class="keyword">and</span> t2.tagname = <span class="string">'ruby'</span> <span class="keyword">and</span> t1.book_id = t2.book_id <span class="keyword">and</span> b.id = t1.book_id</div></pre></td></tr></table></figure></p>
+<h3 id="关系型数据库的设计-1"><a href="#关系型数据库的设计-1" class="headerlink" title="关系型数据库的设计"></a>关系型数据库的设计</h3><p>两张表，一张book的明细，一张tag表，表示每本的tag，一本书存在多个tag。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> book;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+-------------------------------+----------------+</span></span><br><span class="line"><span class="operator">|</span> id   <span class="operator">|</span> name                          <span class="operator">|</span> author         <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+-------------------------------+----------------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> The Ruby Programming <span class="keyword">Language</span> <span class="operator">|</span> Mark Pilgrim   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> Ruby <span class="keyword">on</span> rail                  <span class="operator">|</span> David Flanagan <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> Programming Erlang            <span class="operator">|</span> Joe Armstrong  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+-------------------------------+----------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tag;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------+</span></span><br><span class="line"><span class="operator">|</span> tagname <span class="operator">|</span> book_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------+</span></span><br><span class="line"><span class="operator">|</span> ruby    <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> ruby    <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> web     <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> erlang  <span class="operator">|</span>       <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------+</span></span><br></pre></td></tr></table></figure>
+<p>假如有如此需求，查找即是ruby又是web方面的书籍，如果以关系型数据库会怎么处理？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.name, b.author  <span class="keyword">from</span> tag t1, tag t2, book b</span><br><span class="line"><span class="keyword">where</span> t1.tagname <span class="operator">=</span> <span class="string">&#x27;web&#x27;</span> <span class="keyword">and</span> t2.tagname <span class="operator">=</span> <span class="string">&#x27;ruby&#x27;</span> <span class="keyword">and</span> t1.book_id <span class="operator">=</span> t2.book_id <span class="keyword">and</span> b.id <span class="operator">=</span> t1.book_id</span><br></pre></td></tr></table></figure>
 <p>tag表自关联2次再与book关联，这个sql还是比较复杂的，如果要求即ruby，但不是web方面的书籍呢？</p>
 <p>关系型数据其实并不太适合这些集合操作。</p>
-<h3 id="redis的设计-1"><a href="#redis的设计-1" class="headerlink" title="redis的设计"></a>redis的设计</h3><p>首先book的数据肯定要存储的，和上面一样。<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> book:<span class="number">1</span>:name     "The Ruby Programming Language"</div><div class="line"><span class="built_in">Set</span> book:<span class="number">2</span>:name     "Ruby on rail"</div><div class="line"><span class="built_in">Set</span> book:<span class="number">3</span>:name     "Programming Erlang"</div><div class="line"></div><div class="line"><span class="built_in">set</span> book:<span class="number">1</span>:author     "Mark Pilgrim"</div><div class="line"><span class="built_in">Set</span> book:<span class="number">2</span>:author     "David Flanagan"</div><div class="line"><span class="built_in">Set</span> book:<span class="number">3</span>:author     "Joe Armstrong"</div></pre></td></tr></table></figure></p>
-<p>tag表我们使用集合来存储数据，因为集合擅长求交集、并集<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sadd tag:ruby <span class="number">1</span></div><div class="line">sadd tag:ruby <span class="number">2</span></div><div class="line">sadd tag:web <span class="number">2</span></div><div class="line">sadd tag:erlang <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>那么，即属于ruby又属于web的书？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">inter_list = redis.sinter(<span class="string">"tag.web"</span>, <span class="string">"tag:ruby"</span>)</div></pre></td></tr></table></figure></p>
-<p>即属于ruby，但不属于web的书？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">inter_list = redis.sdiff(<span class="string">"tag.ruby"</span>, <span class="string">"tag:web"</span>)</div></pre></td></tr></table></figure></p>
-<p>属于ruby和属于web的书的合集？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">inter_list = redis.sunion(<span class="string">"tag.ruby"</span>, <span class="string">"tag:web"</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="redis的设计-1"><a href="#redis的设计-1" class="headerlink" title="redis的设计"></a>redis的设计</h3><p>首先book的数据肯定要存储的，和上面一样。</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> book:<span class="number">1</span>:name     &quot;The Ruby Programming Language&quot;</span><br><span class="line"><span class="built_in">Set</span> book:<span class="number">2</span>:name     &quot;Ruby on rail&quot;</span><br><span class="line"><span class="built_in">Set</span> book:<span class="number">3</span>:name     &quot;Programming Erlang&quot;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> book:<span class="number">1</span>:author     &quot;Mark Pilgrim&quot;</span><br><span class="line"><span class="built_in">Set</span> book:<span class="number">2</span>:author     &quot;David Flanagan&quot;</span><br><span class="line"><span class="built_in">Set</span> book:<span class="number">3</span>:author     &quot;Joe Armstrong&quot;</span><br></pre></td></tr></table></figure>
+<p>tag表我们使用集合来存储数据，因为集合擅长求交集、并集</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sadd tag:ruby <span class="number">1</span></span><br><span class="line">sadd tag:ruby <span class="number">2</span></span><br><span class="line">sadd tag:web <span class="number">2</span></span><br><span class="line">sadd tag:erlang <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>那么，即属于ruby又属于web的书？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inter_list = redis.sinter(<span class="string">&quot;tag.web&quot;</span>, <span class="string">&quot;tag:ruby&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>即属于ruby，但不属于web的书？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inter_list = redis.sdiff(<span class="string">&quot;tag.ruby&quot;</span>, <span class="string">&quot;tag:web&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>属于ruby和属于web的书的合集？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inter_list = redis.sunion(<span class="string">&quot;tag.ruby&quot;</span>, <span class="string">&quot;tag:web&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p>简单到不行阿。</p>
 <p>从以上2个例子可以看出在某些场景里，关系型数据库是不太适合的，你可能能够设计出满足需求的系统，但总是感觉的怪怪的，有种生搬硬套的感觉。</p>
 <p>尤其登录系统这个例子，频繁的为业务建立索引。放在一个复杂的系统里，ddl（创建索引）有可能改变执行计划。导致其它的sql采用不同的执行计划，业务复杂的老系统，这个问题是很难预估的，sql千奇百怪。要求DBA对这个系统里所有的sql都了解，这点太难了。这个问题在oracle里尤其严重，每个DBA估计都碰到过。对于MySQL这类系统，ddl又不方便（虽然现在有online ddl的方法）。碰到大表，DBA凌晨爬起来在业务低峰期操作，这事我没少干过。而这种需求放到redis里就很好处理，DBA仅仅对容量进行预估即可。</p>
 <p>未来的OLTP系统应该是kv和关系型的紧密结合。</p>
-<p>转自：<a href="http://www.hoterran.info/redis_kv_design" target="_blank" rel="external">http://www.hoterran.info/redis_kv_design</a></p>
+<p>转自：<a target="_blank" rel="noopener" href="http://www.hoterran.info/redis_kv_design">http://www.hoterran.info/redis_kv_design</a></p>
 
-      
     </div>
 
-    <div>
-      
-        
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
+    
+    
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/redis/" rel="tag">#redis</a>
-          
-            <a href="/tags/设计/" rel="tag">#设计</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2011/03/16/permissions-algorithm/" rel="next" title="权限算法（按位与或）">
-                <i class="fa fa-chevron-left"></i> 权限算法（按位与或）
-              </a>
-            
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"># redis</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1/" rel="tag"># 设计</a>
           </div>
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2011/12/21/配置plsql-developer远程访问oracle数据库/" rel="prev" title="配置PL/SQL DEVELOPER远程访问oracle数据库">
-                配置PL/SQL DEVELOPER远程访问oracle数据库 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
+        
 
-      
-      
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2011/03/16/permissions-algorithm/" rel="prev" title="权限算法（按位与或）">
+                  <i class="fa fa-chevron-left"></i> 权限算法（按位与或）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2011/12/21/%E9%85%8D%E7%BD%AEplsql-developer%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEoracle%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="配置PL/SQL DEVELOPER远程访问oracle数据库">
+                  配置PL/SQL DEVELOPER远程访问oracle数据库 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
+</div>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
-          </div>
-          
 
-
-          
-  <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
-
-
-        </div>
-        
-          
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+</div>
+  </main>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="Jumkey" />
-          <p class="site-author-name" itemprop="name">Jumkey</p>
-          <p class="site-description motion-element" itemprop="description">Github 上的个人博客</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">66</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">82</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/jumkey" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/jumkey" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://weibo.com/jumkey" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户登录系统"><span class="nav-number">1.</span> <span class="nav-text">用户登录系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关系型数据库的设计"><span class="nav-number">1.1.</span> <span class="nav-text">关系型数据库的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的设计"><span class="nav-number">1.2.</span> <span class="nav-text">redis的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TAG系统"><span class="nav-number">2.</span> <span class="nav-text">TAG系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关系型数据库的设计-1"><span class="nav-number">2.1.</span> <span class="nav-text">关系型数据库的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的设计-1"><span class="nav-number">2.2.</span> <span class="nav-text">redis的设计</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
+  <footer class="footer">
+    <div class="footer-inner">
 
 
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2008 - 
-  <span itemprop="copyrightYear">2016</span>
+<div class="copyright">
+  &copy; 2008 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jumkey</span>
 </div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
+
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -698,38 +404,9 @@
 
 
 
-  
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jumkey';
-      var disqus_identifier = '2011/11/28/redis-kv-design/';
-      var disqus_title = '浅谈REDIS数据库的键值设计';
-      var disqus_url = 'http://blog.cafeboy.org/2011/11/28/redis-kv-design/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-
-  
-  
-  
-
-  
-
-  
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;jumkey&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
 
 </body>
 </html>

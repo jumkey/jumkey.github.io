@@ -1,643 +1,340 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Blog, Cafeboy" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
-
-
-
-
-
-
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.cafeboy.org&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
 <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 <meta property="og:type" content="article">
 <meta property="og:title" content="freemarker语法">
-<meta property="og:url" content="http://blog.cafeboy.org/2012/12/10/freemarker语法/index.html">
+<meta property="og:url" content="https://blog.cafeboy.org/2012/12/10/freemarker%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="后知后觉">
 <meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
-<meta property="og:updated_time" content="2016-09-04T12:54:15.246Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2012-12-10T01:55:27.000Z">
+<meta property="article:modified_time" content="2016-09-04T12:54:15.246Z">
+<meta property="article:author" content="Jumkey">
+<meta property="article:tag" content="Blog, Cafeboy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="freemarker语法">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+
+
+<link rel="canonical" href="https://blog.cafeboy.org/2012/12/10/freemarker%E8%AF%AD%E6%B3%95/">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.cafeboy.org&#x2F;2012&#x2F;12&#x2F;10&#x2F;freemarker%E8%AF%AD%E6%B3%95&#x2F;&quot;,&quot;path&quot;:&quot;2012&#x2F;12&#x2F;10&#x2F;freemarker语法&#x2F;&quot;,&quot;title&quot;:&quot;freemarker语法&quot;}</script>
 
-  <title> freemarker语法 | 后知后觉 </title>
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>freemarker语法 | 后知后觉</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">后知后觉</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
-  <p class="site-subtitle">Google Fans</p>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">后知后觉</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Google Fans</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-goldcard">
-          <a href="/goldcard" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
-            
-            金卡
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-bbpress-chinese-translation">
-          <a href="/bbpress-chinese-translation" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br />
-            
-            bbPress简体中文版
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-goldcard"><a href="/goldcard/" rel="section"><i class="fa fa-credit-card fa-fw"></i>金卡</a></li>
+        <li class="menu-item menu-item-bbpress-chinese-translation"><a href="/bbpress-chinese-translation/" rel="section"><i class="fa fa-globe fa-fw"></i>bbPress简体中文版</a></li>
+  </ul>
 </nav>
 
- </div>
-    </header>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
 
-  <div id="posts" class="posts-expand">
-    
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
+</div>
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                freemarker语法
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2012-12-10T09:55:27+08:00" content="2012-12-10">
-              2012-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂七杂八/" itemprop="url" rel="index">
-                    <span itemprop="name">杂七杂八</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2012/12/10/freemarker语法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/12/10/freemarker语法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div></pre></td><td class="code"><pre><div class="line">一、常用语法</div><div class="line"> EG.一个对象book</div><div class="line">1、输出 $&#123;book.name&#125;</div><div class="line">2、空值判断：$&#123;book.name?if_exists &#125;,</div><div class="line">                       $&#123;book.name?default(&apos;xxx&apos;)&#125;//默认值xxx</div><div class="line">                       $&#123;book.name!&quot;xxx&quot;&#125;//默认值xxx</div><div class="line">3、日期格式：$&#123;book.date?string(&apos;yyyy-MM-dd&apos;)&#125;</div><div class="line">4、数字格式：$&#123;book?string.number&#125;--&lt;#-- 20 --&gt;</div><div class="line">                       $&#123;book?string.currency&#125;--&lt;#-- $20.00 --&gt;</div><div class="line">                       $&#123;book?string.percent&#125;--&lt;#-- 20% --&gt;</div><div class="line">5、插入布尔值：</div><div class="line">                       &lt;#assign foo=true /&gt;</div><div class="line">                       $&#123;foo?string(&quot;yes&quot;,&quot;no&quot;)&#125; &lt;#-- yes --&gt;</div><div class="line"></div><div class="line">二、内置方法</div><div class="line">1、数字型</div><div class="line">                     &lt;#assign answer=42/&gt;</div><div class="line">                        $&#123;answer&#125;</div><div class="line">                        $&#123;answer?string&#125;  &lt;#-- the same as $&#123;answer&#125; --&gt;</div><div class="line">                        $&#123;answer?string.number&#125;</div><div class="line">                        $&#123;answer?string.currency&#125;</div><div class="line">                        $&#123;answer?string.percent&#125;</div><div class="line"></div><div class="line">                        &lt;#setting number_format=&quot;0.###E0&quot;/&gt;</div><div class="line"></div><div class="line">                        $&#123;12345?string(&quot;0.####E0&quot;)&#125;  </div><div class="line"></div><div class="line">                        $&#123;answer?string(&quot;number&quot;)&#125; 等同于：$&#123;answer?string.number&#125;.</div><div class="line"></div><div class="line">2、日期型：</div><div class="line">         预定义格式包括：short ，middle和long。</div><div class="line">                        $&#123;openingTime?string.short&#125;</div><div class="line">                        $&#123;openingTime?string.medium&#125;</div><div class="line">                        $&#123;openingTime?string.long&#125;</div><div class="line">         组合使用：$&#123;lastUpdated?string.short_long&#125;</div><div class="line">                        $&#123;lastUpdated?string(&quot;yyyy-MM-dd HH:mm:ss zzzz&quot;)&#125;</div><div class="line"></div><div class="line">3、逻辑型</div><div class="line">                        foo?string</div><div class="line">                        foo?string(&quot;yes&quot;, &quot;no&quot;)</div><div class="line">4、序列的内置方法：</div><div class="line">                        first</div><div class="line">                        last</div><div class="line">                        seq_contains</div><div class="line">                        $&#123;x?seq_contains(&quot;blue&quot;)?string(&quot;yes&quot;, &quot;no&quot;)&#125;</div><div class="line">                        seq_index_of</div><div class="line">                        seq_last_index_of</div><div class="line">                        reverse</div><div class="line">                        size</div><div class="line">                        sort</div><div class="line">                        sort_by</div><div class="line">             多层次的hash排序</div><div class="line">                        &lt;#assign members = [</div><div class="line">                         &#123;&quot;name&quot;: &#123;&quot;first&quot;: &quot;Joe&quot;, &quot;last&quot;: &quot;Smith&quot;&#125;, &quot;age&quot;: 40&#125;,</div><div class="line">                         &#123;&quot;name&quot;: &#123;&quot;first&quot;: &quot;Fred&quot;, &quot;last&quot;: &quot;Crooger&quot;&#125;, &quot;age&quot;: 35&#125;,</div><div class="line">                        &#123;&quot;name&quot;: &#123;&quot;first&quot;: &quot;Amanda&quot;, &quot;last&quot;: &quot;Fox&quot;&#125;, &quot;age&quot;: 25&#125;]&gt;</div><div class="line">                        Sorted by name.last:</div><div class="line">                        &lt;#list members?sort_by([&apos;name&apos;, &apos;last&apos;]) as m&gt;</div><div class="line">                        - $&#123;m.name.last&#125;, $&#123;m.name.first&#125;: $&#123;m.age&#125; years old</div><div class="line">                        &lt;/#list&gt;</div><div class="line"></div><div class="line">                        chunk：将一个序列分解成几个序列。</div><div class="line">                        &lt;#assign seq = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;, &apos;f&apos;, &apos;g&apos;, &apos;h&apos;, &apos;i&apos;, &apos;j&apos;]&gt;</div><div class="line">                        &lt;#list seq?chunk(4) as row&gt;</div><div class="line">                        &lt;#list row as cell&gt;$&#123;cell&#125; &lt;/#list&gt;</div><div class="line">                        &lt;/#list&gt;</div><div class="line">                        &lt;#list seq?chunk(4, &apos;-&apos;) as row&gt;</div><div class="line">                        &lt;#list row as cell&gt;$&#123;cell&#125; &lt;/#list&gt;</div><div class="line">                        &lt;/#list&gt;</div><div class="line">                        chunk经常用于分栏或者表格输出的格式。</div><div class="line">5、hash内置方法：</div><div class="line">                        keys：</div><div class="line">                        values：</div><div class="line">三、序列</div><div class="line">由逗号分隔的变量列表，由方括号限定，类似java中的一维数组</div><div class="line"></div><div class="line">&lt;#assign seq = [&quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumn&quot;]&gt;</div><div class="line">&lt;#list seq as x&gt;</div><div class="line">  $&#123;x_index + 1&#125;. $&#123;x&#125;&lt;#if x_has_next&gt;,&lt;/#if&gt;</div><div class="line"></div><div class="line">&lt;/#list&gt;</div><div class="line"></div><div class="line">输出</div><div class="line">  1\. winter,</div><div class="line">  2\. spring,</div><div class="line">  3\. summer,</div><div class="line">  4\. autumn  </div><div class="line"></div><div class="line">四、Hashes(散列)</div><div class="line"></div><div class="line">    由逗号分隔的键-值列表，由大括号限定，键和值之间用冒号分隔：&#123;&quot;name&quot;:&quot;green mouse&quot;, &quot;price&quot;:150&#125;，键和值都是表达式，但是键必须是字符串。</div><div class="line">&lt;#assign ages = &#123;&quot;Joe&quot;:23, &quot;Fred&quot;:25&#125; + &#123;&quot;Joe&quot;:30, &quot;Julia&quot;:18&#125;&gt;</div><div class="line">Joe is $&#123;ages.Joe&#125;</div><div class="line">Fred is $&#123;ages.Fred&#125;</div><div class="line"> Julia is $&#123;ages.Julia&#125;</div><div class="line">结果：</div><div class="line">- Joe is 30</div><div class="line">- Fred is 25</div><div class="line">- Julia is 18</div><div class="line">五、freemarker的空值和默认值</div><div class="line"></div><div class="line">$&#123;user?if_exists&#125;      </div><div class="line"></div><div class="line">$&#123;user?default(&apos;your name&apos;)&#125;</div><div class="line"></div><div class="line">判断对象是不是null</div><div class="line">&lt;#if mouse?exists&gt;</div><div class="line">      Mouse found</div><div class="line">&lt;#else&gt;</div><div class="line"></div><div class="line">或&lt;#if book.name?? &gt;</div><div class="line"></div><div class="line"> Mouse found</div><div class="line">&lt;/#if&gt;</div><div class="line">list 空值判断  &lt;#if bookList?size = 0&gt;</div><div class="line"></div><div class="line">六、算术运算</div><div class="line">比较操作符－&lt;#if expression&gt;...&lt;/#if&gt;</div><div class="line">1.)使用=（或==，完全相等）测试两个值是否相等，使用!= 测试两个值是否不相等</div><div class="line">2.)=和!=两边必须是相同类型的值，否则会产生错误，例如&lt;#if 1 = &quot;1&quot;&gt;会引起错误</div><div class="line">3.)Freemarker是精确比较，所以&quot;x&quot;、&quot;x  &quot;和&quot;X&quot;是不相等的</div><div class="line">4.)对数字和日期可以使用&lt;、&lt;=、&gt;和&gt;=，但不能用于字符串</div><div class="line">5.)由于Freemarker会将&gt;解释成FTL标记的结束字符，所以对于&gt;和&gt;=可以使用括号来避免这种情况，例如&lt;#if (x &gt; y)&gt;，另一种替代的方法是，使用lt、lte、gt和gte来替代&lt;、&lt;=、&gt;和&gt;=</div><div class="line"></div><div class="line">逻辑操作符－&amp;&amp;(and)、||(or)、!(not)，只能用于布尔值，否则会产生错误</div><div class="line">&lt;#if x &lt; 12 &amp;&amp; color = &quot;green&quot;&gt;</div><div class="line">  We have less than 12 things, and they are green.</div><div class="line">&lt;/#if&gt;</div><div class="line">&lt;#if !hot&gt; &lt;#-- here hot must be a boolean --&gt;</div><div class="line">  It&apos;s not hot.</div><div class="line">&lt;/#if&gt;  </div><div class="line"></div><div class="line">内置函数－用法类似访问hash(散列)的子变量，只是使用&quot;?&quot;替代&quot;.&quot;，例如：user?upper_case</div><div class="line">下面列出常用的一些函数：</div><div class="line">对于字符串</div><div class="line">html－对字符串进行HTML编码</div><div class="line">cap_first－使字符串第一个字母大写</div><div class="line">lower_case－将字符串转换成小写</div><div class="line">trim－去掉字符串前后的空白字符</div><div class="line">对于Sequences(序列)</div><div class="line">size－获得序列中元素的数目</div><div class="line">对于数字</div><div class="line">int－取得数字的整数部分（如-1.9?int的结果是-1）</div><div class="line"></div><div class="line">例一：</div><div class="line"></div><div class="line">&lt;#-- test的值为Tom &amp; Jerry --&gt;</div><div class="line">  $&#123;test?html&#125;</div><div class="line">  $&#123;test?upper_case?html&#125;</div><div class="line">结果：</div><div class="line">Tom &amp; Jerry</div><div class="line">TOM &amp; JERRY</div><div class="line"></div><div class="line">例二：</div><div class="line"></div><div class="line">&lt;#-- seasons的值为&quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumn&quot; --&gt;</div><div class="line">$&#123;seasons?size&#125;</div><div class="line">$&#123;seasons[1]?cap_first&#125; &lt;#-- left side can by any expression --&gt;</div><div class="line">$&#123;&quot;horse&quot;?cap_first&#125;  </div><div class="line">结果：</div><div class="line">4</div><div class="line">Spring</div><div class="line">Horse  </div><div class="line"></div><div class="line">方法的调用</div><div class="line">$&#123;repeat(&quot;What&quot;, 3)&#125;</div><div class="line">$&#123;repeat(repeat(&quot;x&quot;, 2), 3) + repeat(&quot;What&quot;, 4)?upper_case&#125;</div><div class="line">结果：</div><div class="line">WhatWhatWhat</div><div class="line">xxxxxxWHATWHATWHATWHAT</div><div class="line"></div><div class="line">操作符优先顺序</div><div class="line">后缀            [subvarName] [subStringRange] . (methodParams)</div><div class="line">一元            +expr、-expr、!</div><div class="line">内建            ?</div><div class="line">乘法            *、 / 、%</div><div class="line">加法            +、-</div><div class="line">关系            &lt;、&gt;、&lt;=、&gt;=（lt、lte、gt、gte）</div><div class="line">相等            =、!=</div><div class="line">逻辑            &amp;&amp;</div><div class="line">逻辑            ||</div><div class="line">数字范围      ..</div><div class="line"></div><div class="line">三.) Interpolation：由$&#123;...&#125;或#&#123;...&#125;两种类型，输出计算值，可以定义输出的格式</div><div class="line">例一：</div><div class="line"></div><div class="line">&lt;#setting number_format=&quot;currency&quot;/&gt;</div><div class="line">&lt;#assign answer=42/&gt;</div><div class="line">$&#123;answer&#125;</div><div class="line">$&#123;answer?string&#125;  &lt;#-- the same as $&#123;answer&#125; --&gt;</div><div class="line">$&#123;answer?string.number&#125;</div><div class="line">$&#123;answer?string.currency&#125;</div><div class="line">$&#123;answer?string.percent&#125;</div><div class="line">结果：</div><div class="line">$42.00</div><div class="line">$42.00</div><div class="line">42</div><div class="line">$42.00</div><div class="line">4,200%</div><div class="line"></div><div class="line">例二：</div><div class="line"></div><div class="line">$&#123;lastUpdated?string(&quot;yyyy-MM-dd HH:mm:ss zzzz&quot;)&#125;</div><div class="line">$&#123;lastUpdated?string(&quot;EEE, MMM d, &apos;&apos;yy&quot;)&#125;</div><div class="line">$&#123;lastUpdated?string(&quot;EEEE, MMMM dd, yyyy, hh:mm:ss a &apos;(&apos;zzz&apos;)&apos;&quot;)&#125;  </div><div class="line">结果：</div><div class="line">2003-04-08 21:24:44 Pacific Daylight Time</div><div class="line">Tue, Apr 8, &apos;03</div><div class="line">Tuesday, April 08, 2003, 09:24:44 PM (PDT)</div><div class="line"></div><div class="line">例三：</div><div class="line"></div><div class="line">&lt;#assign foo=true/&gt;</div><div class="line">$&#123;foo?string(&quot;yes&quot;, &quot;no&quot;)&#125;</div><div class="line">结果：</div><div class="line">yes</div><div class="line"></div><div class="line">例四：</div><div class="line"></div><div class="line">&lt;#-- x is 2.582 and y is 4 --&gt;</div><div class="line">#&#123;x; M2&#125;   &lt;#-- 2.58 --&gt;</div><div class="line">#&#123;y; M2&#125;   &lt;#-- 4    --&gt;</div><div class="line">#&#123;x; m1&#125;   &lt;#-- 2.6 --&gt;</div><div class="line">#&#123;y; m1&#125;   &lt;#-- 4.0 --&gt;</div><div class="line">#&#123;x; m1M2&#125; &lt;#-- 2.58 --&gt;</div><div class="line">#&#123;y; m1M2&#125; &lt;#-- 4.0  --&gt;  </div><div class="line">说明：mX－小数部分最小X位；MX－小数部分最大X位。</div><div class="line"></div><div class="line">四.) 注释：&lt;#--和--&gt;</div><div class="line"></div><div class="line">下面是一个常用的模板例子：</div><div class="line"></div><div class="line">&lt;p&gt;We have these animals:</div><div class="line">&lt;table border=1&gt;</div><div class="line">  &lt;tr&gt;&lt;th&gt;Name&lt;th&gt;Price</div><div class="line">  &lt;#list animals as being&gt;</div><div class="line">  &lt;tr&gt;</div><div class="line">    &lt;td&gt;</div><div class="line">      &lt;#if being.size = &quot;large&quot;&gt;**&lt;/#if&gt;</div><div class="line">      $&#123;being.name&#125;</div><div class="line">      &lt;#if being.size=&quot;large&quot;&gt;**&lt;/#if&gt;</div><div class="line">    &lt;td&gt;$&#123;being.price&#125; Euros</div><div class="line">  &lt;/#list&gt;</div><div class="line"> &lt;/table&gt;</div><div class="line">&lt;#include &quot;/copyright_footer.html&quot;&gt;</div><div class="line">注意点：</div><div class="line">1.) FreeMarker是区分大小写的；</div><div class="line">2.) FTL标记不能位于另一个FTL标记内部，例如：&lt;#if &lt;#include &apos;foo&apos;&gt;=&apos;bar&apos;&gt;...&lt;/if&gt;；</div><div class="line">3.) $&#123;...&#125;只能在文本中使用；</div><div class="line">4.) 多余的空白字符会在模板输出时去除；</div><div class="line">5.) 如果使用的指令不存在，会产生一个错误消息。</div><div class="line">&lt;#-- x的值设定为5 --&gt;</div><div class="line">$&#123;x * x - 100&#125;</div><div class="line">$&#123;x / 2&#125;</div><div class="line">$&#123;12 % 10&#125;</div><div class="line">结果：</div><div class="line">-75</div><div class="line">2.5</div><div class="line">2</div><div class="line"></div><div class="line">注意： 操作符两边必须是数字；使用&quot;+&quot;时，如果一边是数字，一边是字符串，就会自动将数字转换为字符串。</div><div class="line">使用内建的指令int获得整数部分：</div><div class="line">$&#123;(x/2)?int&#125;</div><div class="line">$&#123;1.1?int&#125;</div><div class="line">$&#123;1.999?int&#125;</div><div class="line">$&#123;-1.1?int&#125;</div><div class="line">$&#123;-1.999?int&#125;</div><div class="line">结果：</div><div class="line">2</div><div class="line">1</div><div class="line">1</div><div class="line">-1</div><div class="line">-1</div></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    <div>
-      
-        
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2012/11/12/分手/" rel="next" title="分手">
-                <i class="fa fa-chevron-left"></i> 分手
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2013/01/09/《英国病人》中嘉芙莲临死前写给艾玛殊的信/" rel="prev" title="《英国病人》中嘉芙莲临死前写给艾玛殊的信">
-                《英国病人》中嘉芙莲临死前写给艾玛殊的信 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
+  <aside class="sidebar">
 
-          </div>
-          
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
 
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jumkey"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Jumkey</p>
+  <div class="site-description" itemprop="description">Github 上的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
       </div>
-    
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jumkey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jumkey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/jumkey" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jumkey" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/jumkey" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;jumkey" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
   </div>
 
 
+
         </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="Jumkey" />
-          <p class="site-author-name" itemprop="name">Jumkey</p>
-          <p class="site-description motion-element" itemprop="description">Github 上的个人博客</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">66</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">82</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/jumkey" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/jumkey" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://weibo.com/jumkey" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
-      
-
+      </div>
     </div>
   </aside>
+  <div class="sidebar-dimmer"></div>
 
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.cafeboy.org/2012/12/10/freemarker%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Jumkey">
+      <meta itemprop="description" content="Github 上的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="后知后觉">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          freemarker语法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2012-12-10 09:55:27" itemprop="dateCreated datePublished" datetime="2012-12-10T09:55:27+08:00">2012-12-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2016-09-04 20:54:15" itemprop="dateModified" datetime="2016-09-04T20:54:15+08:00">2016-09-04</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2012/12/10/freemarker%E8%AF%AD%E6%B3%95/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/12/10/freemarker语法/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br></pre></td><td class="code"><pre><span class="line">一、常用语法</span><br><span class="line"> EG.一个对象book</span><br><span class="line">1、输出 $&#123;book.name&#125;</span><br><span class="line">2、空值判断：$&#123;book.name?if_exists &#125;,</span><br><span class="line">                       $&#123;book.name?default(&#x27;xxx&#x27;)&#125;//默认值xxx</span><br><span class="line">                       $&#123;book.name!&quot;xxx&quot;&#125;//默认值xxx</span><br><span class="line">3、日期格式：$&#123;book.date?string(&#x27;yyyy-MM-dd&#x27;)&#125;</span><br><span class="line">4、数字格式：$&#123;book?string.number&#125;--&lt;#-- 20 --&gt;</span><br><span class="line">                       $&#123;book?string.currency&#125;--&lt;#-- $20.00 --&gt;</span><br><span class="line">                       $&#123;book?string.percent&#125;--&lt;#-- 20% --&gt;</span><br><span class="line">5、插入布尔值：</span><br><span class="line">                       &lt;#assign foo=true /&gt;</span><br><span class="line">                       $&#123;foo?string(&quot;yes&quot;,&quot;no&quot;)&#125; &lt;#-- yes --&gt;</span><br><span class="line"></span><br><span class="line">二、内置方法</span><br><span class="line">1、数字型</span><br><span class="line">                     &lt;#assign answer=42/&gt;</span><br><span class="line">                        $&#123;answer&#125;</span><br><span class="line">                        $&#123;answer?string&#125;  &lt;#-- the same as $&#123;answer&#125; --&gt;</span><br><span class="line">                        $&#123;answer?string.number&#125;</span><br><span class="line">                        $&#123;answer?string.currency&#125;</span><br><span class="line">                        $&#123;answer?string.percent&#125;</span><br><span class="line"></span><br><span class="line">                        &lt;#setting number_format=&quot;0.###E0&quot;/&gt;</span><br><span class="line"></span><br><span class="line">                        $&#123;12345?string(&quot;0.####E0&quot;)&#125;  </span><br><span class="line"></span><br><span class="line">                        $&#123;answer?string(&quot;number&quot;)&#125; 等同于：$&#123;answer?string.number&#125;.</span><br><span class="line"></span><br><span class="line">2、日期型：</span><br><span class="line">         预定义格式包括：short ，middle和long。</span><br><span class="line">                        $&#123;openingTime?string.short&#125;</span><br><span class="line">                        $&#123;openingTime?string.medium&#125;</span><br><span class="line">                        $&#123;openingTime?string.long&#125;</span><br><span class="line">         组合使用：$&#123;lastUpdated?string.short_long&#125;</span><br><span class="line">                        $&#123;lastUpdated?string(&quot;yyyy-MM-dd HH:mm:ss zzzz&quot;)&#125;</span><br><span class="line"></span><br><span class="line">3、逻辑型</span><br><span class="line">                        foo?string</span><br><span class="line">                        foo?string(&quot;yes&quot;, &quot;no&quot;)</span><br><span class="line">4、序列的内置方法：</span><br><span class="line">                        first</span><br><span class="line">                        last</span><br><span class="line">                        seq_contains</span><br><span class="line">                        $&#123;x?seq_contains(&quot;blue&quot;)?string(&quot;yes&quot;, &quot;no&quot;)&#125;</span><br><span class="line">                        seq_index_of</span><br><span class="line">                        seq_last_index_of</span><br><span class="line">                        reverse</span><br><span class="line">                        size</span><br><span class="line">                        sort</span><br><span class="line">                        sort_by</span><br><span class="line">             多层次的hash排序</span><br><span class="line">                        &lt;#assign members = [</span><br><span class="line">                         &#123;&quot;name&quot;: &#123;&quot;first&quot;: &quot;Joe&quot;, &quot;last&quot;: &quot;Smith&quot;&#125;, &quot;age&quot;: 40&#125;,</span><br><span class="line">                         &#123;&quot;name&quot;: &#123;&quot;first&quot;: &quot;Fred&quot;, &quot;last&quot;: &quot;Crooger&quot;&#125;, &quot;age&quot;: 35&#125;,</span><br><span class="line">                        &#123;&quot;name&quot;: &#123;&quot;first&quot;: &quot;Amanda&quot;, &quot;last&quot;: &quot;Fox&quot;&#125;, &quot;age&quot;: 25&#125;]&gt;</span><br><span class="line">                        Sorted by name.last:</span><br><span class="line">                        &lt;#list members?sort_by([&#x27;name&#x27;, &#x27;last&#x27;]) as m&gt;</span><br><span class="line">                        - $&#123;m.name.last&#125;, $&#123;m.name.first&#125;: $&#123;m.age&#125; years old</span><br><span class="line">                        &lt;/#list&gt;</span><br><span class="line"></span><br><span class="line">                        chunk：将一个序列分解成几个序列。</span><br><span class="line">                        &lt;#assign seq = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;, &#x27;i&#x27;, &#x27;j&#x27;]&gt;</span><br><span class="line">                        &lt;#list seq?chunk(4) as row&gt;</span><br><span class="line">                        &lt;#list row as cell&gt;$&#123;cell&#125; &lt;/#list&gt;</span><br><span class="line">                        &lt;/#list&gt;</span><br><span class="line">                        &lt;#list seq?chunk(4, &#x27;-&#x27;) as row&gt;</span><br><span class="line">                        &lt;#list row as cell&gt;$&#123;cell&#125; &lt;/#list&gt;</span><br><span class="line">                        &lt;/#list&gt;</span><br><span class="line">                        chunk经常用于分栏或者表格输出的格式。</span><br><span class="line">5、hash内置方法：</span><br><span class="line">                        keys：</span><br><span class="line">                        values：</span><br><span class="line">三、序列</span><br><span class="line">由逗号分隔的变量列表，由方括号限定，类似java中的一维数组</span><br><span class="line"></span><br><span class="line">&lt;#assign seq = [&quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumn&quot;]&gt;</span><br><span class="line">&lt;#list seq as x&gt;</span><br><span class="line">  $&#123;x_index + 1&#125;. $&#123;x&#125;&lt;#if x_has_next&gt;,&lt;/#if&gt;</span><br><span class="line"></span><br><span class="line">&lt;/#list&gt;</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">  1\. winter,</span><br><span class="line">  2\. spring,</span><br><span class="line">  3\. summer,</span><br><span class="line">  4\. autumn  </span><br><span class="line"></span><br><span class="line">四、Hashes(散列)</span><br><span class="line"></span><br><span class="line">    由逗号分隔的键-值列表，由大括号限定，键和值之间用冒号分隔：&#123;&quot;name&quot;:&quot;green mouse&quot;, &quot;price&quot;:150&#125;，键和值都是表达式，但是键必须是字符串。</span><br><span class="line">&lt;#assign ages = &#123;&quot;Joe&quot;:23, &quot;Fred&quot;:25&#125; + &#123;&quot;Joe&quot;:30, &quot;Julia&quot;:18&#125;&gt;</span><br><span class="line">Joe is $&#123;ages.Joe&#125;</span><br><span class="line">Fred is $&#123;ages.Fred&#125;</span><br><span class="line"> Julia is $&#123;ages.Julia&#125;</span><br><span class="line">结果：</span><br><span class="line">- Joe is 30</span><br><span class="line">- Fred is 25</span><br><span class="line">- Julia is 18</span><br><span class="line">五、freemarker的空值和默认值</span><br><span class="line"></span><br><span class="line">$&#123;user?if_exists&#125;      </span><br><span class="line"></span><br><span class="line">$&#123;user?default(&#x27;your name&#x27;)&#125;</span><br><span class="line"></span><br><span class="line">判断对象是不是null</span><br><span class="line">&lt;#if mouse?exists&gt;</span><br><span class="line">      Mouse found</span><br><span class="line">&lt;#else&gt;</span><br><span class="line"></span><br><span class="line">或&lt;#if book.name?? &gt;</span><br><span class="line"></span><br><span class="line"> Mouse found</span><br><span class="line">&lt;/#if&gt;</span><br><span class="line">list 空值判断  &lt;#if bookList?size = 0&gt;</span><br><span class="line"></span><br><span class="line">六、算术运算</span><br><span class="line">比较操作符－&lt;#if expression&gt;...&lt;/#if&gt;</span><br><span class="line">1.)使用=（或==，完全相等）测试两个值是否相等，使用!= 测试两个值是否不相等</span><br><span class="line">2.)=和!=两边必须是相同类型的值，否则会产生错误，例如&lt;#if 1 = &quot;1&quot;&gt;会引起错误</span><br><span class="line">3.)Freemarker是精确比较，所以&quot;x&quot;、&quot;x  &quot;和&quot;X&quot;是不相等的</span><br><span class="line">4.)对数字和日期可以使用&lt;、&lt;=、&gt;和&gt;=，但不能用于字符串</span><br><span class="line">5.)由于Freemarker会将&gt;解释成FTL标记的结束字符，所以对于&gt;和&gt;=可以使用括号来避免这种情况，例如&lt;#if (x &gt; y)&gt;，另一种替代的方法是，使用lt、lte、gt和gte来替代&lt;、&lt;=、&gt;和&gt;=</span><br><span class="line"></span><br><span class="line">逻辑操作符－&amp;&amp;(and)、||(or)、!(not)，只能用于布尔值，否则会产生错误</span><br><span class="line">&lt;#if x &lt; 12 &amp;&amp; color = &quot;green&quot;&gt;</span><br><span class="line">  We have less than 12 things, and they are green.</span><br><span class="line">&lt;/#if&gt;</span><br><span class="line">&lt;#if !hot&gt; &lt;#-- here hot must be a boolean --&gt;</span><br><span class="line">  It&#x27;s not hot.</span><br><span class="line">&lt;/#if&gt;  </span><br><span class="line"></span><br><span class="line">内置函数－用法类似访问hash(散列)的子变量，只是使用&quot;?&quot;替代&quot;.&quot;，例如：user?upper_case</span><br><span class="line">下面列出常用的一些函数：</span><br><span class="line">对于字符串</span><br><span class="line">html－对字符串进行HTML编码</span><br><span class="line">cap_first－使字符串第一个字母大写</span><br><span class="line">lower_case－将字符串转换成小写</span><br><span class="line">trim－去掉字符串前后的空白字符</span><br><span class="line">对于Sequences(序列)</span><br><span class="line">size－获得序列中元素的数目</span><br><span class="line">对于数字</span><br><span class="line">int－取得数字的整数部分（如-1.9?int的结果是-1）</span><br><span class="line"></span><br><span class="line">例一：</span><br><span class="line"></span><br><span class="line">&lt;#-- test的值为Tom &amp; Jerry --&gt;</span><br><span class="line">  $&#123;test?html&#125;</span><br><span class="line">  $&#123;test?upper_case?html&#125;</span><br><span class="line">结果：</span><br><span class="line">Tom &amp; Jerry</span><br><span class="line">TOM &amp; JERRY</span><br><span class="line"></span><br><span class="line">例二：</span><br><span class="line"></span><br><span class="line">&lt;#-- seasons的值为&quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumn&quot; --&gt;</span><br><span class="line">$&#123;seasons?size&#125;</span><br><span class="line">$&#123;seasons[1]?cap_first&#125; &lt;#-- left side can by any expression --&gt;</span><br><span class="line">$&#123;&quot;horse&quot;?cap_first&#125;  </span><br><span class="line">结果：</span><br><span class="line">4</span><br><span class="line">Spring</span><br><span class="line">Horse  </span><br><span class="line"></span><br><span class="line">方法的调用</span><br><span class="line">$&#123;repeat(&quot;What&quot;, 3)&#125;</span><br><span class="line">$&#123;repeat(repeat(&quot;x&quot;, 2), 3) + repeat(&quot;What&quot;, 4)?upper_case&#125;</span><br><span class="line">结果：</span><br><span class="line">WhatWhatWhat</span><br><span class="line">xxxxxxWHATWHATWHATWHAT</span><br><span class="line"></span><br><span class="line">操作符优先顺序</span><br><span class="line">后缀            [subvarName] [subStringRange] . (methodParams)</span><br><span class="line">一元            +expr、-expr、!</span><br><span class="line">内建            ?</span><br><span class="line">乘法            *、 / 、%</span><br><span class="line">加法            +、-</span><br><span class="line">关系            &lt;、&gt;、&lt;=、&gt;=（lt、lte、gt、gte）</span><br><span class="line">相等            =、!=</span><br><span class="line">逻辑            &amp;&amp;</span><br><span class="line">逻辑            ||</span><br><span class="line">数字范围      ..</span><br><span class="line"></span><br><span class="line">三.) Interpolation：由$&#123;...&#125;或#&#123;...&#125;两种类型，输出计算值，可以定义输出的格式</span><br><span class="line">例一：</span><br><span class="line"></span><br><span class="line">&lt;#setting number_format=&quot;currency&quot;/&gt;</span><br><span class="line">&lt;#assign answer=42/&gt;</span><br><span class="line">$&#123;answer&#125;</span><br><span class="line">$&#123;answer?string&#125;  &lt;#-- the same as $&#123;answer&#125; --&gt;</span><br><span class="line">$&#123;answer?string.number&#125;</span><br><span class="line">$&#123;answer?string.currency&#125;</span><br><span class="line">$&#123;answer?string.percent&#125;</span><br><span class="line">结果：</span><br><span class="line">$42.00</span><br><span class="line">$42.00</span><br><span class="line">42</span><br><span class="line">$42.00</span><br><span class="line">4,200%</span><br><span class="line"></span><br><span class="line">例二：</span><br><span class="line"></span><br><span class="line">$&#123;lastUpdated?string(&quot;yyyy-MM-dd HH:mm:ss zzzz&quot;)&#125;</span><br><span class="line">$&#123;lastUpdated?string(&quot;EEE, MMM d, &#x27;&#x27;yy&quot;)&#125;</span><br><span class="line">$&#123;lastUpdated?string(&quot;EEEE, MMMM dd, yyyy, hh:mm:ss a &#x27;(&#x27;zzz&#x27;)&#x27;&quot;)&#125;  </span><br><span class="line">结果：</span><br><span class="line">2003-04-08 21:24:44 Pacific Daylight Time</span><br><span class="line">Tue, Apr 8, &#x27;03</span><br><span class="line">Tuesday, April 08, 2003, 09:24:44 PM (PDT)</span><br><span class="line"></span><br><span class="line">例三：</span><br><span class="line"></span><br><span class="line">&lt;#assign foo=true/&gt;</span><br><span class="line">$&#123;foo?string(&quot;yes&quot;, &quot;no&quot;)&#125;</span><br><span class="line">结果：</span><br><span class="line">yes</span><br><span class="line"></span><br><span class="line">例四：</span><br><span class="line"></span><br><span class="line">&lt;#-- x is 2.582 and y is 4 --&gt;</span><br><span class="line">#&#123;x; M2&#125;   &lt;#-- 2.58 --&gt;</span><br><span class="line">#&#123;y; M2&#125;   &lt;#-- 4    --&gt;</span><br><span class="line">#&#123;x; m1&#125;   &lt;#-- 2.6 --&gt;</span><br><span class="line">#&#123;y; m1&#125;   &lt;#-- 4.0 --&gt;</span><br><span class="line">#&#123;x; m1M2&#125; &lt;#-- 2.58 --&gt;</span><br><span class="line">#&#123;y; m1M2&#125; &lt;#-- 4.0  --&gt;  </span><br><span class="line">说明：mX－小数部分最小X位；MX－小数部分最大X位。</span><br><span class="line"></span><br><span class="line">四.) 注释：&lt;#--和--&gt;</span><br><span class="line"></span><br><span class="line">下面是一个常用的模板例子：</span><br><span class="line"></span><br><span class="line">&lt;p&gt;We have these animals:</span><br><span class="line">&lt;table border=1&gt;</span><br><span class="line">  &lt;tr&gt;&lt;th&gt;Name&lt;th&gt;Price</span><br><span class="line">  &lt;#list animals as being&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;</span><br><span class="line">      &lt;#if being.size = &quot;large&quot;&gt;**&lt;/#if&gt;</span><br><span class="line">      $&#123;being.name&#125;</span><br><span class="line">      &lt;#if being.size=&quot;large&quot;&gt;**&lt;/#if&gt;</span><br><span class="line">    &lt;td&gt;$&#123;being.price&#125; Euros</span><br><span class="line">  &lt;/#list&gt;</span><br><span class="line"> &lt;/table&gt;</span><br><span class="line">&lt;#include &quot;/copyright_footer.html&quot;&gt;</span><br><span class="line">注意点：</span><br><span class="line">1.) FreeMarker是区分大小写的；</span><br><span class="line">2.) FTL标记不能位于另一个FTL标记内部，例如：&lt;#if &lt;#include &#x27;foo&#x27;&gt;=&#x27;bar&#x27;&gt;...&lt;/if&gt;；</span><br><span class="line">3.) $&#123;...&#125;只能在文本中使用；</span><br><span class="line">4.) 多余的空白字符会在模板输出时去除；</span><br><span class="line">5.) 如果使用的指令不存在，会产生一个错误消息。</span><br><span class="line">&lt;#-- x的值设定为5 --&gt;</span><br><span class="line">$&#123;x * x - 100&#125;</span><br><span class="line">$&#123;x / 2&#125;</span><br><span class="line">$&#123;12 % 10&#125;</span><br><span class="line">结果：</span><br><span class="line">-75</span><br><span class="line">2.5</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">注意： 操作符两边必须是数字；使用&quot;+&quot;时，如果一边是数字，一边是字符串，就会自动将数字转换为字符串。</span><br><span class="line">使用内建的指令int获得整数部分：</span><br><span class="line">$&#123;(x/2)?int&#125;</span><br><span class="line">$&#123;1.1?int&#125;</span><br><span class="line">$&#123;1.999?int&#125;</span><br><span class="line">$&#123;-1.1?int&#125;</span><br><span class="line">$&#123;-1.999?int&#125;</span><br><span class="line">结果：</span><br><span class="line">2</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">-1</span><br><span class="line">-1</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
 
         
-      </div>
-    </main>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2012/11/12/%E5%88%86%E6%89%8B/" rel="prev" title="分手">
+                  <i class="fa fa-chevron-left"></i> 分手
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2013/01/09/%E3%80%8A%E8%8B%B1%E5%9B%BD%E7%97%85%E4%BA%BA%E3%80%8B%E4%B8%AD%E5%98%89%E8%8A%99%E8%8E%B2%E4%B8%B4%E6%AD%BB%E5%89%8D%E5%86%99%E7%BB%99%E8%89%BE%E7%8E%9B%E6%AE%8A%E7%9A%84%E4%BF%A1/" rel="next" title="《英国病人》中嘉芙莲临死前写给艾玛殊的信">
+                  《英国病人》中嘉芙莲临死前写给艾玛殊的信 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
   
-  &copy;  2008 - 
-  <span itemprop="copyrightYear">2016</span>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2008 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jumkey</span>
 </div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
+
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -645,38 +342,9 @@
 
 
 
-  
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jumkey';
-      var disqus_identifier = '2012/12/10/freemarker语法/';
-      var disqus_title = 'freemarker语法';
-      var disqus_url = 'http://blog.cafeboy.org/2012/12/10/freemarker语法/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-
-  
-  
-  
-
-  
-
-  
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;jumkey&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
 
 </body>
 </html>
